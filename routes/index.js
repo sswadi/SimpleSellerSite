@@ -19,7 +19,7 @@ router.post('/addStoreInfo/:id',  upload.fields([
 
 
 //change the below to post
-router.get('/inventoryPage', homeController.inventoryPage );
+router.get('/inventoryPage/:id', homeController.inventoryPage );
 
 
 module.exports = router;

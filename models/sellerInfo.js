@@ -47,7 +47,6 @@ const sellerSchema = new mongoose.Schema({
     inventory: [inventorySchema],
     // url: {
     //     type: String,
-    //     required: true,
     //     unique: true
     // }
 });

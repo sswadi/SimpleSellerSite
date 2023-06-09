@@ -10,8 +10,6 @@ var subcategory = {
     Home_And_Kitchen: ["Cookware", "Utensils", "Home Appliances"]
 }
 
-console.log('THIS IS THE JS FILEEEEEEEE');
-
 function makeSubmenu(value) {
     if (value === "") {
         document.getElementById("subCategory").innerHTML = "<option></option>";

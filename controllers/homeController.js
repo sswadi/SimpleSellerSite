@@ -141,7 +141,7 @@ module.exports.addStoreInfo = function (req, res) {
         return user.save();
       })
       .then(() => {
-        res.redirect('/inventoryPage');
+        res.redirect(`/inventoryPage/${userId}`);
       })
       .catch(error => {
         console.error(error);
@@ -150,7 +150,11 @@ module.exports.addStoreInfo = function (req, res) {
 }
 
 module.exports.inventoryPage = function (req, res) {
-    return res.render('inventoryPage');
+    // return res.render('inventoryPage');
+
+    res.render('inventoryPage');
+
+
 }
 
 
