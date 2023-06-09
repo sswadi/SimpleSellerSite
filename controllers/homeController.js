@@ -1,21 +1,17 @@
 const User = require('../models/sellerInfo');
 
-const generateUniqueId = () => {
-    const alphanumeric = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-    let uniqueId = '';
-
-    for (let i = 0; i < 10; i++) {
-        const randomIndex = Math.floor(Math.random() * alphanumeric.length);
-        uniqueId += alphanumeric[randomIndex];
-    }
-    return uniqueId;
-};
 
 module.exports.home = function (req, res) {
     return res.render('home', {
         title: "Home"
     });
 }
+
+module.exports.logout = function(req, res) {
+  
+    return res.render('signIn');
+    // res.redirect('/signIn');
+};
 
 
 module.exports.signUp = function (req, res) {
@@ -92,8 +88,6 @@ module.exports.addStoreInfo = function (req, res) {
     const { address, gst, storeTimings, category, subCategory, productName, mrp, sp, quantity } = req.body;
     const logo = req.files['logo'][0].path;
     const images = req.files['images'].map(file => file.path);
-    // const uniqueId = generateUniqueId();
-    // const url = `http://localhost:8000/inventoryPage/${uniqueId}`;
 
     const userId = req.params.id;
 
@@ -134,9 +128,6 @@ module.exports.addStoreInfo = function (req, res) {
                 images: images,
             });
 
-            // Update the url field
-            // user.url = url;
-
             // Save the updated seller
             return user.save();
         })
@@ -148,6 +139,7 @@ module.exports.addStoreInfo = function (req, res) {
             res.status(500).send('Error saving store details');
         });
 }
+
 
 module.exports.inventoryPage = function (req, res) {
 
@@ -188,12 +180,6 @@ module.exports.inventoryPage = function (req, res) {
 
 
 
-
-            // Access the name property
-            // const productName = seller.productName;
-            // const mrp = seller.MRP;
-            // const sp = seller.SP;
-            // const qty = seller.quantity;
 
 
 
