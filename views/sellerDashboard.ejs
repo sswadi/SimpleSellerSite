@@ -1,0 +1,106 @@
+<head>
+
+  <link rel="stylesheet" href="/css/sellerDash.css">
+</head>
+
+<body>
+  <h1>Welcome to the Seller Dashboard</h1>
+
+
+  <form action="/addStoreInfo" method="POST">
+    <div class="options">
+      <h2>Add Store Info</h2>
+      <label for="address">Address:</label>
+      <input type="text" id="address" name="address" required>
+
+      <label for="gst">GST:</label>
+      <input type="text" id="gst" name="gst" required>
+
+      <label for="logo">Logo:</label>
+      <input type="file" id="logo" name="logo" required>
+
+      <label for="storeTimings">Store Timings:</label>
+      <input type="text" id="storeTimings" name="storeTimings" required>
+    </div>
+
+    <div class="options">
+      
+      <h2>Add Category, Sub Category</h2>
+
+      <label for="category">Category:</label>
+      <select id="category" size="1" onchange="makeSubmenu(this.value)" required>
+        <option value="" disabled selected >Select Category</option>
+        <option value="Electronics">Electronics</option>
+        <option value="Groceries">Groceries</option>
+        <option value="Pet_Supplies">Pet Supplies</option>
+        <option value="Beauty_And_Personal_Care">Beauty & Personal Care</option>
+        <option value="Clothing">Clothing</option>
+        <option value="Books">Books</option>
+        <option value="Home_And_Kitchen">Home & Kitchen</option>
+      </select>
+
+      <label for="subCategory">Sub Category:</label>
+      <select id="subCategory" size="1" required>
+        <option value="" disabled selected>Choose Subcategory</option>
+        <option></option>
+      </select>
+
+    </div>
+
+    <div class="options">
+      <h2>Add Inventory</h2>
+
+      <label for="productName">Product Name:</label>
+      <input type="text" id="productName" name="productName" required>
+
+      <label for="mrp">MRP:</label>
+      <input type="text" id="mrp" name="mrp" required>
+
+      <label for="sp">SP:</label>
+      <input type="text" id="sp" name="sp" required>
+
+      <label for="quantity">Quantity:</label>
+      <input type="text" id="quantity" name="quantity" required>
+
+      <label for="images">Images:</label>
+      <input type="file" id="images" name="images[]" multiple required>
+
+      <button type="submit">Save</button>
+    </div>
+  </form>
+
+  <script>
+    var subcategory = {
+    Mobile: ["Nokia", "Redmi", "Samsung"],
+    Clothes: ["Shirt", "Pant", "T-shirt"],
+    Electronics: ["Mobiles", "Laptops", "Televisions"],
+    Groceries: ["Beverages", "Snacks", "Canned Goods"],
+    Pet_Supplies: ["Dog Supplies", "Cat Supplies", "Bird Supplies"],
+    Beauty_And_Personal_Care: ["Skincare", "Haircare", "Makeup"],
+    Clothing: ["Men's Clothing", "Women's Clothing", "Kids' Clothing"],
+    Books: ["Fiction", "Non-Fiction", "Self-Help"],
+    Home_And_Kitchen: ["Cookware", "Utensils", "Home Appliances"]
+}
+
+console.log('THIS IS THE JS FILEEEEEEEE');
+
+function makeSubmenu(value) {
+    if (value === "") {
+        document.getElementById("subCategory").innerHTML = "<option></option>";
+    } else {
+        var subcategoryOptions = "";
+        //   for (var i = 0; i < subcategory[value].length; i++) {
+        //     subcategoryOptions += "<option>" + subcategory[value][i] + "</option>";
+        //   }
+
+        for (categoryId in subcategory[value]) {
+            subcategoryOptions += "<option>" + subcategory[value][categoryId] + "</option>";
+        }
+        document.getElementById("subCategory").innerHTML = subcategoryOptions;
+    }
+}
+  </script>
+  
+</body>
+
+
