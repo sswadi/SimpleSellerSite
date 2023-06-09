@@ -3,7 +3,23 @@ const app = express();
 const port = 8000; //setting up port
 const db = require('./config/mongoose');
 const expressLayouts = require('express-ejs-layouts'); ////requrining ejs layouts for partials and layouts
+const path = require('path');
+
+// multer is a middleware used to upload files to DB
+const multer = require('multer');
+const storage = multer.diskStorage({
+    destination: (req,file,cb) =>{
+        cb(null, '/assets/images');
+    },
+    filename: (req,file,cb) =>{
+        console.log(file);
+        cb(null, Date.now() + path.extname(file.originalname) ); //we are trying grab the original name
+    },
+});
+const upload = multer({storage: storage}); //multer is an object consisting of various methodss
+
 app.use(express.urlencoded({ extended: true }));
+
 
 app.use(express.static('./assets'));
 

@@ -1,22 +1,5 @@
 const mongoose = require('mongoose');
 
-// const sellerSchema = new mongoose.Schema({
-//     email: {
-//         type: String,
-//         required: true,
-//         unique: true
-//     },
-//     businessName: {
-//         type: String,
-//         required: true
-//     },
-//     password: {
-//         type: String,
-//         required: true
-//     }
-// });
-
-
 // Define the schema for the sellers
 const sellerSchema = new mongoose.Schema({
     email: {
@@ -35,6 +18,11 @@ const sellerSchema = new mongoose.Schema({
     storeInfo: storeSchema,
     categories: [categorySchema],
     inventory: [inventorySchema],
+    url: {
+        type: String,
+        required: true,
+        unique: true
+    }
 });
 
 

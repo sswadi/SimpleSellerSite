@@ -7,7 +7,7 @@
   <h1>Welcome to the Seller Dashboard</h1>
 
 
-  <form action="/addStoreInfo" method="POST">
+  <form action="/addStoreInfo/<%= userId %>" method="POST" enctype="multipart/form-data">
     <div class="options">
       <h2>Add Store Info</h2>
       <label for="address">Address:</label>
@@ -28,7 +28,7 @@
       <h2>Add Category, Sub Category</h2>
 
       <label for="category">Category:</label>
-      <select id="category" size="1" onchange="makeSubmenu(this.value)" required>
+      <select id="category" name="category" size="1" onchange="makeSubmenu(this.value)" required>
         <option value="" disabled selected >Select Category</option>
         <option value="Electronics">Electronics</option>
         <option value="Groceries">Groceries</option>
@@ -40,7 +40,7 @@
       </select>
 
       <label for="subCategory">Sub Category:</label>
-      <select id="subCategory" size="1" required>
+      <select id="subCategory" name="subCategory" size="1" required>
         <option value="" disabled selected>Choose Subcategory</option>
         <option></option>
       </select>
@@ -63,7 +63,7 @@
       <input type="text" id="quantity" name="quantity" required>
 
       <label for="images">Images:</label>
-      <input type="file" id="images" name="images[]" multiple required>
+      <input type="file" id="images" name="images" multiple required>
 
       <button type="submit">Save</button>
     </div>
@@ -82,21 +82,18 @@
     Home_And_Kitchen: ["Cookware", "Utensils", "Home Appliances"]
 }
 
-console.log('THIS IS THE JS FILEEEEEEEE');
-
 function makeSubmenu(value) {
     if (value === "") {
         document.getElementById("subCategory").innerHTML = "<option></option>";
     } else {
         var subcategoryOptions = "";
-        //   for (var i = 0; i < subcategory[value].length; i++) {
-        //     subcategoryOptions += "<option>" + subcategory[value][i] + "</option>";
-        //   }
-
         for (categoryId in subcategory[value]) {
             subcategoryOptions += "<option>" + subcategory[value][categoryId] + "</option>";
         }
         document.getElementById("subCategory").innerHTML = subcategoryOptions;
+         // Set the name attribute of the subcategory select element
+        document.getElementById("subCategory").setAttribute("name", "subCategory");
+        document.getElementById("category").setAttribute("name", "category");
     }
 }
   </script>
