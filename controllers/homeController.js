@@ -82,7 +82,7 @@ module.exports.signIn = async function (req, res) {
 }
 
 module.exports.sellerDash = function (req, res) {
-    
+
     const userId = req.params.id; // Retrieve the user ID from the request parameters
     return res.render('sellerDashboard', { userId });
 }
@@ -95,67 +95,105 @@ module.exports.addStoreInfo = function (req, res) {
     // const uniqueId = generateUniqueId();
     // const url = `http://localhost:8000/inventoryPage/${uniqueId}`;
 
-    const userId = req.params.id; 
+    const userId = req.params.id;
 
     // Find the user by ID
     User.findById(userId)
-    .then(user => {
-        if (!user) {
-          res.status(404).send('Seller not found');
-          return;
-        }
-  
-        // Update the store information
-        user.storeInfo = {
-          address,
-          gst,
-          logo,
-          storeTimings
-        };
-  
-        // Update the categories field
-        if (!user.categories) {
-            user.categories = [];
-        }
-        user.categories.push({
-            category: category,
-          subcategories: [{ name: subCategory }]
+        .then(user => {
+            if (!user) {
+                res.status(404).send('Seller not found');
+                return;
+            }
+
+            // Update the store information
+            user.storeInfo = {
+                address,
+                gst,
+                logo,
+                storeTimings
+            };
+
+            // Update the categories field
+            if (!user.categories) {
+                user.categories = [];
+            }
+            user.categories.push({
+                category: category,
+                subcategories: [{ name: subCategory }]
+            });
+
+            // Update the inventory field
+            if (!user.inventory) {
+                user.inventory = [];
+            }
+            user.inventory.push({
+                productName: productName,
+                MRP: mrp,
+                SP: sp,
+                quantity: quantity,
+                images: images,
+            });
+
+            // Update the url field
+            // user.url = url;
+
+            // Save the updated seller
+            return user.save();
+        })
+        .then(() => {
+            res.redirect(`/inventoryPage/${userId}`);
+        })
+        .catch(error => {
+            console.error(error);
+            res.status(500).send('Error saving store details');
         });
-  
-        // Update the inventory field
-        if (!user.inventory) {
-            user.inventory = [];
-        }
-        user.inventory.push({
-          productName: productName,
-          MRP: mrp,
-          SP: sp,
-          quantity: quantity,
-          images: images,
-        });
-  
-        // Update the url field
-        // user.url = url;
-  
-        // Save the updated seller
-        return user.save();
-      })
-      .then(() => {
-        res.redirect(`/inventoryPage/${userId}`);
-      })
-      .catch(error => {
-        console.error(error);
-        res.status(500).send('Error saving store details');
-      });
 }
 
 module.exports.inventoryPage = function (req, res) {
-    // return res.render('inventoryPage');
 
-    res.render('inventoryPage');
+    const userId = req.params.id;
 
+    User.findOne({ _id: userId })
+        .then(seller => {
+            if (!seller) {
+                // Seller not found
+                return res.status(404).send('Seller not found');
+            }
+            const inventory = seller.inventory;
+
+            // Do something with the name (e.g., pass it to the view)
+            res.render('inventoryPage', {inventory});
+        })
+        .catch(error => {
+            console.error(error);
+            res.status(500).send('Error fetching seller details');
+        });
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            // Access the name property
+            // const productName = seller.productName;
+            // const mrp = seller.MRP;
+            // const sp = seller.SP;
+            // const qty = seller.quantity;
 
 
 

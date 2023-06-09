@@ -1,25 +1,39 @@
 /* Style for Search Bar */
 #search-input {
-    padding: 8px;
-    font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    margin-right: 10px;
-  }
-  
-  #search-button {
-    padding: 8px 16px;
-    font-size: 14px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  /* Style for Results Container */
-  /* #results-container {
-    /* Add your styling for the results container here */
-  
-/* } */
-  
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-right: 10px;
+  align-items: center;
+}
+
+#search-button {
+  padding: 8px 16px;
+  font-size: 14px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Style for Results Container */
+#results-container {
+  margin-top: 20px;
+}
+
+#results-container div {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+#results-container h3 {
+  margin-top: 0;
+}
+
+#results-container p {
+  margin-bottom: 5px;
+}

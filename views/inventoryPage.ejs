@@ -13,7 +13,14 @@
 
     <!-- Results Container -->
     <div id="results-container"></div>
-
+    <% inventory.forEach(item => { %>
+        <div>
+          <h3>Product Name: <%= item.productName %></h3>
+          <p>MRP: <%= item.MRP %></p>
+          <p>SP: <%= item.SP %></p>
+          <p>Quantity: <%= item.quantity %></p>
+        </div>
+      <% }); %>
 
 
 
