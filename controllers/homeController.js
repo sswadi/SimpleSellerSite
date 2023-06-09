@@ -1,4 +1,4 @@
-const User = require('../models/user');
+const User = require('../models/sellerInfo');
 
 const generateUniqueId = () => {
     const alphanumeric = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
@@ -8,7 +8,6 @@ const generateUniqueId = () => {
         const randomIndex = Math.floor(Math.random() * alphanumeric.length);
         uniqueId += alphanumeric[randomIndex];
     }
-
     return uniqueId;
 };
 
@@ -93,46 +92,61 @@ module.exports.addStoreInfo = function (req, res) {
     const { address, gst, storeTimings, category, subCategory, productName, mrp, sp, quantity } = req.body;
     const logo = req.files['logo'][0].path;
     const images = req.files['images'].map(file => file.path);
-    const uniqueId = generateUniqueId();
-    const url = `http://localhost:8000/inventoryPage/${uniqueId}`;
+    // const uniqueId = generateUniqueId();
+    // const url = `http://localhost:8000/inventoryPage/${uniqueId}`;
 
     const userId = req.params.id; 
-    console.log(userId);
 
     // Find the user by ID
-    // User.findById(userId)
-    //     .then(user => {
-    //         if (!user) {
-    //             res.status(404).send('User not found');
-    //             return;
-    //         }
-
-    //         // Update the storeInfo field with the new store information
-    //         user.storeInfo = {
-    //             address,
-    //             gst,
-    //             logo,
-    //             storeTimings,
-    //             category,
-    //             subCategory,
-    //             productName,
-    //             mrp,
-    //             sp,
-    //             quantity,
-    //             images,
-    //             url
-    //         };
-
-    //         // Save the user instance
-    //         return user.save();
-    //     })
-    //     .then(() => {
-    //         res.redirect('/inventoryPage');
-    //     })
-    //     .catch(error => {
-    //         console.error(error);
-    //         res.status(500).send('Error saving store details');
-    //     });
+    User.findById(userId)
+    .then(user => {
+        if (!user) {
+          res.status(404).send('Seller not found');
+          return;
+        }
+  
+        // Update the store information
+        user.storeInfo = {
+          address,
+          gst,
+          logo,
+          storeTimings
+        };
+  
+        // Update the categories field
+        if (!user.categories) {
+            user.categories = [];
+        }
+        user.categories.push({
+            category: category,
+          subcategories: [{ name: subCategory }]
+        });
+  
+        // Update the inventory field
+        if (!user.inventory) {
+            user.inventory = [];
+        }
+        user.inventory.push({
+          productName: productName,
+          MRP: mrp,
+          SP: sp,
+          quantity: quantity,
+          images: images,
+        });
+  
+        // Update the url field
+        // user.url = url;
+  
+        // Save the updated seller
+        return user.save();
+      })
+      .then(() => {
+        res.redirect('/inventoryPage');
+      })
+      .catch(error => {
+        console.error(error);
+        res.status(500).send('Error saving store details');
+      });
 }
 
 module.exports.inventoryPage = function (req, res) {
