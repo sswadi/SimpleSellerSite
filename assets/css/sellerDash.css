@@ -18,7 +18,7 @@ h1 {
 }
 
 label {
-    display: block;
+    display: inline-flex;
     margin-bottom: 5px;
     font-weight: bold;
 }
