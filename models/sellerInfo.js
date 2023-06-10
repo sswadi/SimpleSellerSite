@@ -45,10 +45,6 @@ const sellerSchema = new mongoose.Schema({
     storeInfo: storeSchema,
     categories: [categorySchema],
     inventory: [inventorySchema],
-    // url: {
-    //     type: String,
-    //     unique: true
-    // }
 });
 
 

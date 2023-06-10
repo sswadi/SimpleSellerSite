@@ -2,6 +2,8 @@ const input = document.getElementById("search-input");
 const resultsContainer = document.getElementById("results-container");
 const inventoryItems = document.querySelectorAll(".inventory-item");
 
+console.log("************");
+
 input.addEventListener("input", function() {
   const searchValue = input.value.trim().toLowerCase();
 

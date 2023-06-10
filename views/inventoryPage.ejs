@@ -1,5 +1,5 @@
 <head>
-    <link rel="stylesheet" href="/css/inventory.css">
+  <link rel="stylesheet" href="/css/inventory.css">
 </head>
 
 
@@ -12,18 +12,41 @@
 
   <!-- Results Container -->
   <div id="results-container">
-      <% inventory.forEach(item => { %>
-          <div class="inventory-item">
-              <h3 class="product-name">Product Name: <%= item.productName %></h3>
-              <p>MRP: <%= item.MRP %></p>
-              <p>SP: <%= item.SP %></p>
-              <p>Quantity: <%= item.quantity %></p>
-              <p><img src="/assets/images/<%= item.image %>"></p>
-          </div>
+    <% inventory.forEach(item=> { %>
+      <div class="inventory-item">
+        <h3 class="product-name">Product Name: <%= item.productName %>
+        </h3>
+        <p>MRP: <%= item.MRP %>
+        </p>
+        <p>SP: <%= item.SP %>
+        </p>
+        <p>Quantity: <%= item.quantity %>
+        </p>
+        <p><img src="/assets/images/<%= item.image %>"></p>
+      </div>
       <% }); %>
   </div>
-    
-  <script src="inventory.js"></script>
+
+  <script>
+    const input = document.getElementById("search-input");
+    const resultsContainer = document.getElementById("results-container");
+    const inventoryItems = document.querySelectorAll(".inventory-item");
+
+    input.addEventListener("input", function () {
+      const searchValue = input.value.trim().toLowerCase();
+
+      // Loop through each inventory item
+      inventoryItems.forEach(function (item) {
+        const productName = item.querySelector(".product-name").textContent.toLowerCase();
+
+        // Check if the search value matches the product name
+        if (productName.includes(searchValue)) {
+          item.style.display = "block"; // Display the matching item
+        } else {
+          item.style.display = "none"; // Hide non-matching items
+        }
+      });
+    });
+
+  </script>
 </body>
-
-
