@@ -15,9 +15,6 @@ function makeSubmenu(value) {
         document.getElementById("subCategory").innerHTML = "<option></option>";
     } else {
         var subcategoryOptions = "";
-        //   for (var i = 0; i < subcategory[value].length; i++) {
-        //     subcategoryOptions += "<option>" + subcategory[value][i] + "</option>";
-        //   }
 
         for (categoryId in subcategory[value]) {
             subcategoryOptions += "<option>" + subcategory[value][categoryId] + "</option>";
@@ -26,17 +23,6 @@ function makeSubmenu(value) {
     }
 }
 
-
-// function makeSubmenu(value) {
-//     if (value.length == 0) document.getElementById("subCategory").innerHTML = "<option>default</option>";
-//     else {
-//         var citiesOptions = "";
-//         for (categoryId in subcategory[value]) {
-//             citiesOptions += "<option>" + subcategory[value][categoryId] + "</option>";
-//         }
-//         document.getElementById("subCategory").innerHTML = citiesOptions;
-//     }
-// }
 
 // function displaySelected() {
 //     var cat = document.getElementById("category").value;
