@@ -144,7 +144,6 @@ module.exports.addStoreInfo = function (req, res) {
 module.exports.inventoryPage = function (req, res) {
 
     const userId = req.params.id;
-    alert(`Please copy the following URL: http://localhost:8000/inventoryPage/${userId}`);
 
     User.findOne({ _id: userId })
         .then(seller => {
