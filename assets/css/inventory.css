@@ -1,11 +1,19 @@
-/* Style for Search Bar */
+body {
+  margin: 0;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+h1 {
+  margin-bottom: 20px;
+}
+
 #search-input {
   padding: 8px;
   font-size: 14px;
   border: 1px solid #ccc;
   border-radius: 4px;
   margin-right: 10px;
-  align-items: center;
 }
 
 #search-button {
@@ -18,22 +26,27 @@
   cursor: pointer;
 }
 
-/* Style for Results Container */
 #results-container {
   margin-top: 20px;
 }
 
-#results-container div {
+.inventory-item {
   border: 1px solid #ccc;
   border-radius: 4px;
   padding: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 
-#results-container h3 {
+.product-name {
   margin-top: 0;
 }
 
-#results-container p {
-  margin-bottom: 5px;
+p {
+  margin: 0;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  margin-top: 10px;
 }

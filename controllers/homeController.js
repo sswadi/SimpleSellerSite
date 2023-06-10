@@ -132,7 +132,7 @@ module.exports.addStoreInfo = function (req, res) {
             return user.save();
         })
         .then(() => {
-            res.redirect(`/inventoryPage/${userId}`);
+            res.redirect(`/c/${userId}`);
         })
         .catch(error => {
             console.error(error);

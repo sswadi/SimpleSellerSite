@@ -4,31 +4,26 @@
 
 
 <body>
-    <h1>Inventory Page</h1>
+  <h1>Inventory Page</h1>
 
+  <!-- Search Bar -->
+  <input type="text" id="search-input" placeholder="Search products...">
+  <button id="search-button">Search</button>
 
-    <!-- Search Bar -->
-    <input type="text" id="search-input" placeholder="Search products...">
-    <button id="search-button">Search</button>
-
-    <!-- Results Container -->
-    <div id="results-container"></div>
-    <% inventory.forEach(item => { %>
-        <div>
-          <h3>Product Name: <%= item.productName %></h3>
-          <p>MRP: <%= item.MRP %></p>
-          <p>SP: <%= item.SP %></p>
-          <p>Quantity: <%= item.quantity %></p>
-        </div>
+  <!-- Results Container -->
+  <div id="results-container">
+      <% inventory.forEach(item => { %>
+          <div class="inventory-item">
+              <h3 class="product-name">Product Name: <%= item.productName %></h3>
+              <p>MRP: <%= item.MRP %></p>
+              <p>SP: <%= item.SP %></p>
+              <p>Quantity: <%= item.quantity %></p>
+              <p><img src="/assets/images/<%= item.image %>"></p>
+          </div>
       <% }); %>
-
-
-
-
-
-
-
-
-    <script src="inventory.js"></script>
+  </div>
+    
+  <script src="inventory.js"></script>
 </body>
+
 

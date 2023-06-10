@@ -5,11 +5,16 @@ const db = require('./config/mongoose');
 const expressLayouts = require('express-ejs-layouts'); ////requrining ejs layouts for partials and layouts
 const path = require('path');
 
+// Serve static files
+// app.use('/assets/images', express.static(path.join(__dirname, 'assets', 'images')));
+app.use(express.static('./assets'));
+
 // multer is a middleware used to upload files to DB
 const multer = require('multer');
-const storage = multer.diskStorage({
+const storage = multer.diskStorage({ //multer.diskStorage is used to define the storage engine for handling file uploads. 
+                                     //In this case, it uses the disk storage engine.
     destination: (req,file,cb) =>{
-        cb(null, '/assets/images');
+        cb(null, './assets/images');
     },
     filename: (req,file,cb) =>{
         console.log(file);
@@ -19,9 +24,6 @@ const storage = multer.diskStorage({
 const upload = multer({storage: storage}); //multer is an object consisting of various methodss
 
 app.use(express.urlencoded({ extended: true }));
-
-
-app.use(express.static('./assets'));
 
 app.use(expressLayouts); //saying out app to use expressLayouts 
 
